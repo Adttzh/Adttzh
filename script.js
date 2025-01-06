@@ -1,26 +1,37 @@
-document.addEventListener('DOMContentLoaded', () =>{
-    const  taskForm = document.getElementById('task-form');
-    const taskInput = document.getElementById('task-input')
-    const taskList = document.getElementById('task-list');
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('converter-form');
+    const amountInput = document.getElementById('amount');
+    const fromCurrencySelect = document.getElementById('from-currency')
+    const resultDisplay = document.getElementById('result')
+    const apiUrl = 'https://api.exchangerate-api.com/v4/latest/usd'
+    fetch(apiUrl)
+    .then(response => response.json())
+    .then(data => {
+        const currencies = Object.keys(data.rates);
+        currencies.forEach(currency => {
+            const option = document.createElement('option');
+            option.value = currency;
+            option.textContent = currency;
+            fromCurrencySelect.appendChild(option);
+            toCurrencySelect.appendChild(option.cloneNode(true));
+        });
+    });
 
-  taskForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    addTask(taskInput.value);
-    taskInput.value='';
-})
 
-   
-   function addTask(task){
-    const li = document.createElement('li');
-    li.textContent = task;
 
-    const deleteButton = document.createElement('button');
-    deleteButton.textContent = 'жою'
-    deleteButton.addEventListener('click', ()  => {
-        taskList.removeChild(li);
-    })
 
-    li.appendChild(deleteButton);
-    taskList.appendChild(li)
-   }
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const amount = amountInput.value;
+        const fromCurrency = fromCurrencySelect.value;
+        const toCurrency = toCurrencySelect.value;
+
+        fetch(`https://api.exchangerate-api.com/v4/latest/${fromCurrency}`)
+        .then(response => response.json())
+        .then(data => {
+            const rate = data.rates[toCurrency];
+            const result = (amount * rate ).toFixed(2);
+            resultDisplay.textContent = `${amount} ${fromCurrency} = ${result} ${toCurrency} `;
+        });
+    });
 })
