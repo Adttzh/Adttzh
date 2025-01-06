@@ -1,19 +1,26 @@
-class shape {
-    draw() {
-        console.log('drawig a shape')
-    }
-}
-class circle extends shape {
-    draw() {
-        console.log('drawig a circle')
-    }
-} 
+document.addEventListener('DOMContentLoaded', () =>{
+    const  taskForm = document.getElementById('task-form');
+    const taskInput = document.getElementById('task-input')
+    const taskList = document.getElementById('task-list');
 
-class square extends shape{
-    draw() {
-        console.log('drawig a square')
-    }
-}
-let shapes = [new shape(), new circle(), new square()];
+  taskForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    addTask(taskInput.value);
+    taskInput.value='';
+})
 
-shapes.forEach(shape => shape.draw());
+   
+   function addTask(task){
+    const li = document.createElement('li');
+    li.textContent = task;
+
+    const deleteButton = document.createElement('button');
+    deleteButton.textContent = 'жою'
+    deleteButton.addEventListener('click', ()  => {
+        taskList.removeChild(li);
+    })
+
+    li.appendChild(deleteButton);
+    taskList.appendChild(li)
+   }
+})

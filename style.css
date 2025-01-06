@@ -1,0 +1,58 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: aliceblue;
+}
+.container{
+    margin: 0 auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px;
+}
+.h1{
+    margin-bottom: 20px;
+}
+form{
+    display: flex;
+}
+
+#task-input{
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+button{
+    padding: 10px;
+    border: none;
+    background: lightgreen;
+    color: white;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+ul{
+    list-style: none;
+    padding: 0;
+}
+li{
+    background: 5px 0;
+    padding: 10px;
+   border-radius: 3px;
+   align-items: center;
+   justify-content: space-between;
+}
+li button{
+    background: red;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    padding: 5px;
+    align-items: end;
+}
