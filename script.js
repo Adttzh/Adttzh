@@ -1,37 +1,19 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('converter-form');
-    const amountInput = document.getElementById('amount');
-    const fromCurrencySelect = document.getElementById('from-currency')
-    const resultDisplay = document.getElementById('result')
-    const apiUrl = 'https://api.exchangerate-api.com/v4/latest/usd'
-    fetch(apiUrl)
-    .then(response => response.json())
-    .then(data => {
-        const currencies = Object.keys(data.rates);
-        currencies.forEach(currency => {
-            const option = document.createElement('option');
-            option.value = currency;
-            option.textContent = currency;
-            fromCurrencySelect.appendChild(option);
-            toCurrencySelect.appendChild(option.cloneNode(true));
-        });
-    });
+class shape {
+    draw() {
+        console.log('drawig a shape')
+    }
+}
+class circle extends shape {
+    draw() {
+        console.log('drawig a circle')
+    }
+} 
 
+class square extends shape{
+    draw() {
+        console.log('drawig a square')
+    }
+}
+let shapes = [new shape(), new circle(), new square()];
 
-
-
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const amount = amountInput.value;
-        const fromCurrency = fromCurrencySelect.value;
-        const toCurrency = toCurrencySelect.value;
-
-        fetch(`https://api.exchangerate-api.com/v4/latest/${fromCurrency}`)
-        .then(response => response.json())
-        .then(data => {
-            const rate = data.rates[toCurrency];
-            const result = (amount * rate ).toFixed(2);
-            resultDisplay.textContent = `${amount} ${fromCurrency} = ${result} ${toCurrency} `;
-        });
-    });
-})
+shapes.forEach(shape => shape.draw());
